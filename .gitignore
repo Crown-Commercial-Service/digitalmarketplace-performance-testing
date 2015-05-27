@@ -1,0 +1,58 @@
+results/*
+target/
+target/*
+*.ipr
+*.iml
+*.iml.bak
+*.iws
+.idea/
+logs/
+node_modules/
+node_modules/*
+.DS_Store
+.DS_Store
+version.conf
+RUNNING_PID
+*.swp
+.idea_modules/
+*.pydevproject
+.project
+.metadata
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+.target
+*.class
+.cache
+*.deb
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath

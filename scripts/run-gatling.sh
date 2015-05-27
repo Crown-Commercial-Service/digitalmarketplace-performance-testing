@@ -60,4 +60,4 @@ while getopts ":-:" opt; do
   esac
 done
 
-./bin/gatling.sh -Dusers=$USERS -DrampUp=$RAMP_UP -DpageSize=$PAGE_SIZE -Drepeat=$REPEAT -Dunit=$UNIT -DminIdleTime=$MIN_IDLE -DmaxIdleTime=$MAX_IDLE -nr -s $TEST
+./bin/gatling.sh -Dusers=$USERS -DrampUp=$RAMP_UP -DpageSize=$PAGE_SIZE -Drepeat=$REPEAT -Dunit=$UNIT -DminIdleTime=$MIN_IDLE -DmaxIdleTime=$MAX_IDLE -s $TEST

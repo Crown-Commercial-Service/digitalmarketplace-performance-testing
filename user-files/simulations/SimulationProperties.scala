@@ -1,6 +1,6 @@
-import com.typesafe.config.{ConfigFactory, Config}
+import com.typesafe.config.ConfigFactory
 import org.joda.time.DateTime
-import org.joda.time.format.{DateTimeFormat, DateTimeFormatter}
+import org.joda.time.format.DateTimeFormat
 
 /**
  * Environment properties set up before the run.
@@ -9,7 +9,8 @@ import org.joda.time.format.{DateTimeFormat, DateTimeFormatter}
 object SimulationProperties{
   val conf = ConfigFactory.load("simulation.conf")
 
-  val baseLocateUrl = getStringFromConf("url")
+  val baseBuyerUrl = getStringFromConf("buyer_url")
+  val baseDataApiUrl = getStringFromConf("data_api_url")
 
   val bearerToken = "Bearer " + getStringFromConf("token")
 

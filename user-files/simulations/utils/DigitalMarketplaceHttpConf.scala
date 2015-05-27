@@ -1,6 +1,8 @@
+package utils
+
+import SimulationProperties._
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import SimulationProperties._
 
 trait DigitalMarketplaceHttpConf {
 

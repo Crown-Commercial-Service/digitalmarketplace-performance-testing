@@ -1,3 +1,4 @@
+import utils.{SimulationProperties, ScenarioHelpers, DigitalMarketplaceHttpConf, CustomFeeders}
 import CustomFeeders.searchTerms
 import SimulationProperties._
 import ScenarioHelpers._

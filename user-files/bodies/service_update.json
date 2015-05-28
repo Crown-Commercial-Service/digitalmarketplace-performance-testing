@@ -1,0 +1,9 @@
+{
+  "update_details": {
+    "updated_by": "gatling",
+    "update_reason": "performance tests"
+  },
+  "services": {
+    "serviceName": "new service name"
+  }
+}

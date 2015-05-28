@@ -43,11 +43,6 @@ while getopts ":-:" opt; do
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
                 MAX_IDLE=${val}
                 ;;
-            pageSize)
-                val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
-                echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                PAGE_SIZE=${val}
-                ;;
             test)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
@@ -60,4 +55,4 @@ while getopts ":-:" opt; do
   esac
 done
 
-./bin/gatling.sh -Dusers=$USERS -DrampUp=$RAMP_UP -DpageSize=$PAGE_SIZE -Drepeat=$REPEAT -Dunit=$UNIT -DminIdleTime=$MIN_IDLE -DmaxIdleTime=$MAX_IDLE -s $TEST
+./bin/gatling.sh -Dusers=$USERS -DrampUp=$RAMP_UP -Drepeat=$REPEAT -Dunit=$UNIT -DminIdleTime=$MIN_IDLE -DmaxIdleTime=$MAX_IDLE -s $TEST

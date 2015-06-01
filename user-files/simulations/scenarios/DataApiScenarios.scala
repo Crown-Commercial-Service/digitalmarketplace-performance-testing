@@ -2,7 +2,7 @@ package scenarios
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
-import utils.CustomFeeders.{randomServiceId, supplierIds, randomPage, serviceIds}
+import utils.CustomFeeders.{randomServiceId, randomServicePage, serviceIds, randomSupplierId, randomSupplierPage, supplierIds}
 import utils.ScenarioHelpers._
 import utils.SimulationProperties._
 
@@ -12,7 +12,7 @@ object DataApiScenarios {
 
   val fetchServices = scenario("FetchServices")
     .keepRepeating {
-    feed(randomPage)
+    feed(randomServicePage)
       .exec(http("FetchServices")
       .get("/services?page=${random_page}")
       .check(status.is(200))
@@ -55,4 +55,39 @@ object DataApiScenarios {
       ).pause(minIdleTime milliseconds, maxIdleTime milliseconds)
   }
 
+  private val supplierPagesFeed = feed(randomSupplierPage)
+    .exec(
+      http("Fetch supplier page")
+        .get("/suppliers?page=${random_page}")
+        .check(status.is(200))
+        .check(jsonPath("$.suppliers[*].links.self").findAll.saveAs("supplierUrls"))
+    )
+    .pause(minIdleTime milliseconds, maxIdleTime milliseconds)
+
+  val fetchSuppliers = scenario("Fetch suppliers")
+    .keepRepeating {
+    supplierPagesFeed
+      .foreach("${supplierUrls}", "supplierUrl") {
+      exec(
+        http("Fetch supplier")
+          .get("${supplierUrl}")
+          .check(status.is(200))
+      )
+    }
+  }
+
+  val fetchSupplierPages = scenario("Fetch supplier pages")
+    .keepRepeating { supplierPagesFeed }
+
+  val importSuppliers = scenario("Import suppliers")
+    .keepRepeating {
+    feed(randomSupplierId)
+      .exec(
+        http("Import service")
+          .put("/suppliers/${random_number}")
+          .body(ELFileBody("supplier.json"))
+          .headers(headersMap)
+          .check(status.is(201))
+      ).pause(minIdleTime milliseconds, maxIdleTime milliseconds)
+  }
 }

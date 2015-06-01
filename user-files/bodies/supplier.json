@@ -1,0 +1,13 @@
+{
+  "update_details": {
+    "updated_by": "gatling",
+    "updated_reason": "perf test"
+  },
+  "suppliers": {
+    "id": "",
+    "name": "",
+    "contactInformation": [
+
+    ]
+  }
+}

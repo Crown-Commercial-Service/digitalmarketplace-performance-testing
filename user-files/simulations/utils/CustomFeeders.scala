@@ -20,7 +20,7 @@ object CustomFeeders {
     def hasNext: Boolean = true
 
     def next(): Map[String, String] = {
-      Map("random_number" -> RandomStringUtils.random(10, false, true))
+      Map("random_number" -> RandomStringUtils.random(16, false, true))
     }
   }
 

@@ -16,19 +16,37 @@ object CustomFeeders {
 
   val serviceIds = csv("service_ids.csv").random
 
-  val randomServiceId = new Feeder[String]{
-    def hasNext: Boolean = true
+  private def randomIdFeeder(idSize:Int): Feeder[String] = {
+    new Feeder[String]{
+      def hasNext: Boolean = true
 
-    def next(): Map[String, String] = {
-      Map("random_number" -> RandomStringUtils.random(16, false, true))
+      def next(): Map[String, String] = {
+        Map("random_number" -> RandomStringUtils.random(idSize, false, true))
+      }
     }
   }
 
-  val randomPage = new Feeder[String]{
-    def hasNext: Boolean = true
+  val randomServiceId = randomIdFeeder(16)
 
-    def next(): Map[String, String] = {
-      Map("random_page" -> String.valueOf(r.nextInt(50) + 1))
+  val randomSupplierId = randomIdFeeder(5)
+
+  /**
+   * Generate a random page number between 1 and the maxPageSize provided.
+   *
+   * @param maxPageSize
+   * @return Feeder[String]
+   */
+  private def randomPage(maxPageSize:Int): Feeder[String] = {
+    new Feeder[String] {
+      def hasNext: Boolean = true
+
+      def next(): Map[String, String] = {
+        Map("random_page" -> String.valueOf(r.nextInt(maxPageSize) + 1))
+      }
     }
   }
+
+  val randomServicePage = randomPage(50)
+
+  val randomSupplierPage = randomPage(10)
 }

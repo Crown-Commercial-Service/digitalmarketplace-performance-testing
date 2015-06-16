@@ -1,0 +1,6 @@
+{
+  "authUsers": {
+    "emailAddress": "${supplierEmailAddress}",
+    "password": "${supplierPassword}"
+  }
+}

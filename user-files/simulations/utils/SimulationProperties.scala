@@ -34,6 +34,8 @@ object SimulationProperties{
   val username = Option(System.getProperty("username")).getOrElse("user")
   val password = Option(System.getProperty("password")).getOrElse("password")
   val authHeaderData = Option(System.getProperty("authHeaderData")).getOrElse("user:password")
+  val supplierEmailAddress = getStringFromConf("supplierEmailAddress")
+  val supplierPassword = getStringFromConf("supplierPassword")
 
   private def getIntFromConf(name: String) = Option(Integer.getInteger(name)).map(_.toInt).getOrElse(conf.getInt(name))
   private def getStringFromConf(name: String) = Option(System.getProperty(name)).getOrElse(conf.getString(name))

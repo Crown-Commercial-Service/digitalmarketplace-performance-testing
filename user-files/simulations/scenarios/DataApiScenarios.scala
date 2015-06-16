@@ -90,4 +90,16 @@ object DataApiScenarios {
           .check(status.is(201))
       ).pause(minIdleTime milliseconds, maxIdleTime milliseconds)
   }
+
+  val loginUsers = scenario("Login users")
+    .keepRepeating {
+    feed(Iterator.continually(Map("supplierEmailAddress" -> s"${supplierEmailAddress}", "supplierPassword" -> s"${supplierPassword}")))
+      .exec(
+        http("Login user")
+          .post("/users/auth")
+          .body(ELFileBody("supplier-user-login.json"))
+          .headers(headersMap)
+          .check(status.is(200))
+      ).pause(minIdleTime milliseconds, maxIdleTime milliseconds)
+  }
 }

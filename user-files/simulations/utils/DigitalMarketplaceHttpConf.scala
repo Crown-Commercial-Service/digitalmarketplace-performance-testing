@@ -9,7 +9,7 @@ trait DigitalMarketplaceHttpConf {
   private val headersMap = Map("Authorization" -> bearerToken)
 
   val wwwHttpConf = http
-    .baseURL(baseBuyerUrl)
+    .baseURL(baseUrl)
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") // Here are the common headers
     .doNotTrackHeader("1")
     .acceptLanguageHeader("en-US,en;q=0.5")

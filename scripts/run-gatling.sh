@@ -13,6 +13,11 @@ while getopts ":-:" opt; do
   case $opt in
     -)
         case "${OPTARG}" in
+            baseUrl)
+                val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
+                echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
+                BASE_URL=${val}
+                ;;
             username)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
@@ -67,4 +72,4 @@ done
 
 echo $TEST
 
-./bin/gatling.sh -Dusername=$USERNAME -Dpassword=$PASSWORD -Dusers=$USERS -DrampUp=$RAMP_UP -Drepeat=$REPEAT -Dunit=$UNIT -DminIdleTime=$MIN_IDLE -DmaxIdleTime=$MAX_IDLE -s $TEST
+./bin/gatling.sh -DbaseUrl=$BASE_URL -Dusername=$USERNAME -Dpassword=$PASSWORD -Dusers=$USERS -DrampUp=$RAMP_UP -Drepeat=$REPEAT -Dunit=$UNIT -DminIdleTime=$MIN_IDLE -DmaxIdleTime=$MAX_IDLE -s $TEST

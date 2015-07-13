@@ -10,7 +10,7 @@ import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
 
-class BuyerBrowseKeywordsAndFilterSimluation extends Simulation with DigitalMarketplaceHttpConf {
+class BuyerBrowseKeywordsAndFilterSimulation extends Simulation with DigitalMarketplaceHttpConf {
 
 	val httpProtocol = http
 		.baseURL("https://www.beta.digitalmarketplace.service.gov.uk")
@@ -81,7 +81,7 @@ class BuyerBrowseKeywordsAndFilterSimluation extends Simulation with DigitalMark
 			.get(uri2 + "/static/images/breadcrumb-separator.png"),
             http("request_16")
 			.get(uri2 + "/static/images/option-select-toggle-sprite.png")))
-		.pause(8)
+		.pause(minIdleTime milliseconds, maxIdleTime milliseconds)
 		.exec(http("request_18")
 			.get("/g-cloud/search?q=email+services&lot=saas")
 			.headers(headers_0)
@@ -121,7 +121,7 @@ class BuyerBrowseKeywordsAndFilterSimluation extends Simulation with DigitalMark
 			.get(uri2 + "/static/images/search-result-highlight-mask.png"),
             http("request_31")
 			.get(uri2 + "/static/images/pagination-arrow-sprite.png")))
-		.pause(5)
+		.pause(minIdleTime milliseconds, maxIdleTime milliseconds)
 		.exec(http("request_36")
 			.get("/g-cloud/search?q=email+services&lot=saas&freeOption=true&trialOption=true")
 			.headers(headers_0)
@@ -161,7 +161,7 @@ class BuyerBrowseKeywordsAndFilterSimluation extends Simulation with DigitalMark
 			.get(uri2 + "/static/images/search-result-highlight-mask.png"),
             http("request_51")
 			.get(uri2 + "/static/images/option-select-toggle-sprite.png")))
-		.pause(12)
+		.pause(minIdleTime milliseconds, maxIdleTime milliseconds)
 		.exec(http("request_53")
 			.get("/g-cloud/search?q=email+services&lot=saas&serviceTypes=customer+relationship+management+%28crm%29&freeOption=true&trialOption=true")
 			.headers(headers_0)

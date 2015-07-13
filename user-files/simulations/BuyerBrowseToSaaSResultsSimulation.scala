@@ -63,7 +63,7 @@ class BuyerBrowseToSaaSResultsSimulation extends Simulation with DigitalMarketpl
             http("request_11")
 			.get(uri2 + "/static/images/breadcrumb-separator.png")
 			.headers(headers_14)))
-		.pause(2)
+		.pause(minIdleTime milliseconds, maxIdleTime milliseconds)
 		.exec(http("request_15")
 			.get("/g-cloud/search?lot=saas")
 			.resources(http("request_16")

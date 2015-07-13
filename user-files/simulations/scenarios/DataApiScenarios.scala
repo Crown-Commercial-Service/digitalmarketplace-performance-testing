@@ -93,7 +93,7 @@ object DataApiScenarios {
 
   val loginUsers = scenario("Login users")
     .keepRepeating {
-    feed(Iterator.continually(Map("supplierEmailAddress" -> s"${supplierEmailAddress}", "supplierPassword" -> s"${supplierPassword}")))
+    feed(Iterator.continually(Map("supplierEmailAddress" -> s"${username}", "supplierPassword" -> s"${password}")))
       .exec(
         http("Login user")
           .post("/users/auth")

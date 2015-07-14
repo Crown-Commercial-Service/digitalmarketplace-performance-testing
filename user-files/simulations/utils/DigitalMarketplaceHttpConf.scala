@@ -18,7 +18,7 @@ trait DigitalMarketplaceHttpConf {
     .disableCaching
 
   val dataApiHttpConf = http
-    .baseURL(baseDataApiUrl)
+    .baseURL(baseUrl)
     .acceptHeader("application/json")
     .disableFollowRedirect
     .disableCaching

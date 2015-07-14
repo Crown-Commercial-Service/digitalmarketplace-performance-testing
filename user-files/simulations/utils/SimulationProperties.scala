@@ -12,7 +12,6 @@ object SimulationProperties{
   val conf = ConfigFactory.load("simulation.conf")
 
   val baseUrl = Option(getStringFromConf("baseUrl")).getOrElse("http://localhost:5002")
-  val baseDataApiUrl = getStringFromConf("data_api_url")
 
   val bearerToken = "Bearer " + getStringFromConf("token")
 

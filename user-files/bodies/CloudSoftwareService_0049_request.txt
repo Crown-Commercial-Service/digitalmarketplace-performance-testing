@@ -1,0 +1,21 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataStorageAndProcessing"
+
+True
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataStorageAndProcessingLocations"
+
+uk
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataStorageAndProcessingLocations"
+
+privacy_shield
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataStorageAndProcessingUserControl"
+
+True
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_continue"
+
+Save and continue
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

@@ -1,0 +1,17 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="devicesUsersManageTheServiceThrough"
+
+dedicated_device_on_segregated_network
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="devicesUsersManageTheServiceThrough"
+
+dedicated_device_over_multiple_networks
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="devicesUsersManageTheServiceThrough"
+
+any_device
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_return"
+
+Save and return to service summary
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

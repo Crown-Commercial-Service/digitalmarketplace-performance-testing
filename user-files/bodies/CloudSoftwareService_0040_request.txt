@@ -1,0 +1,21 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="metrics"
+
+True
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="metricsDescription"
+
+Describe the service metrics you provide. Describe the service metrics you provide. Describe the service metrics you provide. Describe the service metrics you provide. Describe the service metrics you provide. Describe the service metrics you provide. Describe the service metrics you provide. Describe the service metrics you provide. Describe the service metrics you provide. 
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="metricsHow"
+
+api
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="metricsHow"
+
+regular_reports
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_return"
+
+Save and return to service summary
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

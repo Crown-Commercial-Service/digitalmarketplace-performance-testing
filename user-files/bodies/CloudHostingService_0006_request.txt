@@ -1,0 +1,25 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="serviceCategories"
+
+Archiving, backup and disaster recovery
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="serviceCategories"
+
+Container service
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="serviceCategories"
+
+Data warehousing
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="serviceCategories"
+
+Relational database
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="serviceCategories"
+
+Distributed denial of service attack (DDOS) protection
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_return"
+
+Save and return to service summary
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

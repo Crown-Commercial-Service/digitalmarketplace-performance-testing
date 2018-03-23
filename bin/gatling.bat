@@ -1,6 +1,6 @@
 @ECHO OFF
 @REM
-@REM Copyright 2011-2014 eBusiness Information, Groupe Excilys (www.ebusinessinformation.fr)
+@REM Copyright 2011-2016 GatlingCorp (http://gatling.io)
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -38,35 +38,44 @@ goto :noHome
 
 :gotHome
 
-set GATLING_CONF="%GATLING_HOME%"\conf
+if not defined GATLING_CONF set GATLING_CONF="%GATLING_HOME%"\conf
 
 echo GATLING_HOME is set to "%GATLING_HOME%"
 
-set JAVA_OPTS=-server -XX:+UseThreadPriorities -XX:ThreadPriorityPolicy=42 -Xms512M -Xmx512M -Xmn100M -XX:+HeapDumpOnOutOfMemoryError -XX:+AggressiveOpts -XX:+OptimizeStringConcat -XX:+UseFastAccessorMethods -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false %JAVA_OPTS%
-set COMPILER_OPTS=-Xss10M %JAVA_OPTS%
+set JAVA_OPTS=-server -Xmx1G -XX:+UseG1GC -XX:MaxGCPauseMillis=30 -XX:G1HeapRegionSize=16m -XX:InitiatingHeapOccupancyPercent=75 -XX:+ParallelRefProcEnabled -XX:+PerfDisableSharedMem -XX:+AggressiveOpts -XX:+OptimizeStringConcat -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false %JAVA_OPTS%
+set COMPILER_OPTS=-Xss100M %JAVA_OPTS%
 rem Setup classpaths
 set COMMON_CLASSPATH=%GATLING_CONF%;%JAVA_CLASSPATH%
 set COMPILER_CLASSPATH="%GATLING_HOME%"\lib\zinc\*;%COMMON_CLASSPATH%
 set GATLING_CLASSPATH="%GATLING_HOME%"\lib\*;"%GATLING_HOME%"\user-files;%COMMON_CLASSPATH%
 
+set JAVA=java
+if exist "%JAVA_HOME%\bin\java.exe" goto setJavaHome
+goto run
 
+:setJavaHome
+set JAVA="%JAVA_HOME%\bin\java.exe"
+
+:run
+echo JAVA = "%JAVA%"
 rem Run the compiler
 set COMPILATION_CLASSPATH=""
 for %%i in ("%GATLING_HOME%\lib\*.jar") do call :addToPath "%%i"
-java %COMPILER_OPTS% -cp %COMPILER_CLASSPATH% io.gatling.compiler.ZincCompiler -ccp %COMPILATION_CLASSPATH% %USER_ARGS%  2>NUL
+%JAVA% %COMPILER_OPTS% -cp %COMPILER_CLASSPATH% io.gatling.compiler.ZincCompiler -ccp %COMPILATION_CLASSPATH% %USER_ARGS%  2>NUL
 rem Run Gatling
-java %JAVA_OPTS% -cp %GATLING_CLASSPATH% io.gatling.app.Gatling %USER_ARGS%
+%JAVA% %JAVA_OPTS% -cp %GATLING_CLASSPATH% io.gatling.app.Gatling %USER_ARGS%
+if %errorlevel% neq 0 exit /b %errorlevel%
+rem The above line will forward any potential exit codes from Java if Gatling failed
 
 goto exit
 
-
 :badHome
-echo The GATLING_HOME environnement variable points to the wrong directory.
+echo The GATLING_HOME environment variable points to the wrong directory.
 echo Please set it to the correct folder and try to launch Gatling again.
 goto exit
 
 :noHome
-echo GATLING_HOME environnement variable is not set and could not be guessed automatically.
+echo GATLING_HOME environment variable is not set and could not be guessed automatically.
 echo Please set GATLING_HOME and try to launch Gatling again.
 goto exit
 

@@ -1,6 +1,6 @@
 @ECHO OFF
 @REM
-@REM Copyright 2011-2014 eBusiness Information, Groupe Excilys (www.ebusinessinformation.fr)
+@REM Copyright 2011-2016 GatlingCorp (http://gatling.io)
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -43,7 +43,17 @@ set JAVA_OPTS=-Xms512M -Xmx512M -Xmn100M %JAVA_OPTS%
 set CLASSPATH="%GATLING_HOME%"\lib\*;"%GATLING_HOME%"\conf;%JAVA_CLASSPATH%
 set COMMAND=-cp %CLASSPATH% io.gatling.recorder.GatlingRecorder
 
-java %JAVA_OPTS% %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
+set JAVA=java
+if exist "%JAVA_HOME%\bin\java.exe" goto setJavaHome
+goto run
+
+:setJavaHome
+set JAVA="%JAVA_HOME%\bin\java.exe"
+
+:run
+echo JAVA = "%JAVA%"
+
+%JAVA% %JAVA_OPTS% %COMMAND% %1 %2 %3 %4 %5 %6 %7 %8 %9
 
 goto exit
 

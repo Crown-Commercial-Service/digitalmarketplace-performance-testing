@@ -6,15 +6,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
-class Declaration extends Simulation {
-
-	val httpProtocol = http
-		.baseURL("http://localhost")
-		.inferHtmlResources(BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png"""), WhiteList())
-		.acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
-		.acceptEncodingHeader("gzip, deflate")
-		.acceptLanguageHeader("en-GB,en-US;q=0.9,en;q=0.8")
-		.userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36")
+Object Declaration {
 
 	val headers_0 = Map("Upgrade-Insecure-Requests" -> "1")
 
@@ -22,7 +14,7 @@ class Declaration extends Simulation {
 		"Origin" -> "http://localhost",
 		"Upgrade-Insecure-Requests" -> "1")
 
-	val scn = scenario("Declaration")
+	val declaration = scenario("Declaration")
 		.exec(http("request_0")
 			.get("/suppliers/frameworks/g-cloud-10/declaration/start")
 			.headers(headers_0))
@@ -125,6 +117,4 @@ class Declaration extends Simulation {
 		.exec(http("request_12")
 			.post("/suppliers/frameworks/g-cloud-10/declaration")
 			.headers(headers_3))
-
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
 }

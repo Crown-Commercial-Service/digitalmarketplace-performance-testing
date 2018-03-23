@@ -6,15 +6,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
-class CloudHostingService extends Simulation {
-
-	val httpProtocol = http
-		.baseURL("http://localhost")
-		.inferHtmlResources(BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png"""), WhiteList())
-		.acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
-		.acceptEncodingHeader("gzip, deflate")
-		.acceptLanguageHeader("en-GB,en-US;q=0.9,en;q=0.8")
-		.userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36")
+object CloudHostingService {
 
 	val headers_0 = Map("Upgrade-Insecure-Requests" -> "1")
 
@@ -56,7 +48,7 @@ class CloudHostingService extends Simulation {
 		.pause(7)
 		.exec(http("request_3")
 			.post("/suppliers/frameworks/g-cloud-10/submissions/cloud-hosting/${cloud_hosting_service_id}/edit/about-your-service/service-categories")
-			.headers(headers_6)
+			.headers(headers_3)
 			.body(RawFileBody("CloudHostingService_0006_request.txt")))
 		.pause(3)
 		.exec(http("request_3")
@@ -65,7 +57,7 @@ class CloudHostingService extends Simulation {
 		.pause(21)
 		.exec(http("request_3")
 			.post("/suppliers/frameworks/g-cloud-10/submissions/cloud-hosting/${cloud_hosting_service_id}/edit/service-features-and-benefits/service-features-and-benefits")
-			.headers(headers_8)
+			.headers(headers_3)
 			.body(RawFileBody("CloudHostingService_0008_request.txt")))
 		.pause(1)
 		.exec(http("request_3")
@@ -501,8 +493,5 @@ val chain_1 = exec(http("request_50")
 			.post("/suppliers/frameworks/g-cloud-10/submissions/cloud-hosting/${cloud_hosting_service_id}/complete")
 			.headers(headers_99))
 
-	val scn = scenario("CloudHostingService").exec(
-		chain_0, chain_1)
-
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+	val cloudHostingService = .exec(chain_0, chain_1)
 }

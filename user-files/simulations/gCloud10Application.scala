@@ -22,7 +22,11 @@ class GCloud10Application extends Simulation {
 		.userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36")
 
 	var scn = scenario("G-Cloud 10 Application")
-		.exec(login, updateSupplierDetails, declaration, cloudHostingService, cloudSoftwareService, cloudSupportService)
+		.exec(login, updateSupplierDetails, declaration)
+		.forever() {
+			exec(cloudHostingService, cloudSoftwareService, cloudSupportService)
+		}
+
 
 	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
 }

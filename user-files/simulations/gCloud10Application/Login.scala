@@ -15,7 +15,7 @@ object Login {
 	val user_feeder = csv("g_10_supplier_logins.csv").circular
 
 	val login = feed(user_feeder)
-		.exec(http("request_0")
+		.exec(http("login_request_0")
 			.post("/user/login")
 			.headers(headers_0)
 			.formParam("csrf_token", "None")

@@ -33,5 +33,5 @@ class GCloud10Application extends Simulation {
 			nothingFor(20 seconds),
 			splitUsers(200) into (rampUsers(10) over (10 seconds)) separatedBy (10 seconds)
 		).exponentialPauses
-	).protocols(httpProtocol)
+	).protocols(httpProtocol).maxDuration(10 minutes)
 }

@@ -17,6 +17,7 @@ object Declaration {
 	val declaration = exec(http("declaration_request_press_apply")
 			.post("/suppliers/frameworks/g-cloud-10")
 			.headers(headers_0))
+		.pause(23)
 		.exec(http("declaration_request_0")
 			.get("/suppliers/frameworks/g-cloud-10/declaration/start")
 			.headers(headers_0))

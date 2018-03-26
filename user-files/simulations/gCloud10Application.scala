@@ -15,7 +15,7 @@ class GCloud10Application extends Simulation {
 
 	val httpProtocol = http
 		.baseURL("http://localhost")
-		.inferHtmlResources(BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png"""), WhiteList())
+		.inferHtmlResources(BlackList(""".*\.js.*""", """.*\.css.*""", """.*\.gif.*""", """.*\.jpeg.*""", """.*\.jpg.*""", """.*\.ico.*""", """.*\.woff.*""", """.*\.(t|o)tf.*""", """.*\.png.*"""), WhiteList())
 		.acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
 		.acceptEncodingHeader("gzip, deflate")
 		.acceptLanguageHeader("en-GB,en-US;q=0.9,en;q=0.8")
@@ -28,10 +28,10 @@ class GCloud10Application extends Simulation {
 		}
 
 	setUp(
-		scn.inject(
-			constantUsersPerSec(4) during (50 seconds) randomized,
-			nothingFor(20 seconds),
-			splitUsers(200) into (rampUsers(10) over (10 seconds)) separatedBy (10 seconds)
-		).exponentialPauses
-	).protocols(httpProtocol).maxDuration(10 minutes)
+	  scn.inject(
+	    constantUsersPerSec(2) during (100 seconds) randomized,
+	    nothingFor(20 seconds),
+	    splitUsers(200) into (rampUsers(10) over (7 seconds)) separatedBy (13 seconds)
+	  ).exponentialPauses
+	).protocols(httpProtocol).maxDuration(11 minutes)
 }

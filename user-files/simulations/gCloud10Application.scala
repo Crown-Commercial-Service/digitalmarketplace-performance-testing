@@ -27,6 +27,11 @@ class GCloud10Application extends Simulation {
 			exec(cloudHostingService, cloudSoftwareService, cloudSupportService)
 		}
 
-
-	setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+	setUp(
+		scn.inject(
+			constantUsersPerSec(4) during (50 seconds) randomized,
+			nothingFor(20 seconds),
+			splitUsers(200) into (rampUsers(10) over (10 seconds)) separatedBy (10 seconds)
+		).exponentialPauses
+	).protocols(httpProtocol)
 }

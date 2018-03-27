@@ -50,4 +50,19 @@ COMPILATION_CLASSPATH=`find "$GATLING_HOME/lib" -maxdepth 1 -name "*.jar" -type 
 # Run the compiler
 "$JAVA" $COMPILER_OPTS -cp "$COMPILER_CLASSPATH" io.gatling.compiler.ZincCompiler -ccp "$COMPILATION_CLASSPATH" "$@"  2> /dev/null
 # Run Gatling
-"$JAVA" $DEFAULT_JAVA_OPTS $JAVA_OPTS -cp "$GATLING_CLASSPATH" io.gatling.app.Gatling "$@"
+# "$JAVA" $DEFAULT_JAVA_OPTS $JAVA_OPTS -cp "$GATLING_CLASSPATH" io.gatling.app.Gatling "$@"
+
+JAVA_PARAMS=()
+NON_JAVA_PARAMS=()
+
+for arg in "$@"
+do
+    if [[ ${arg:0:2} == '-D' ]]
+    then
+        JAVA_PARAMS+=($arg)
+    else
+        NON_JAVA_PARAMS+=($arg)
+    fi
+done
+
+java "${JAVA_PARAMS[@]}" $JAVA_OPTS -cp $GATLING_CLASSPATH io.gatling.app.Gatling "${NON_JAVA_PARAMS[@]}"

@@ -14,7 +14,7 @@ import gCloud10Application.CloudSupportService.cloudSupportService
 class GCloud10Application extends Simulation {
 
 	val httpProtocol = http
-		.baseURL("http://localhost")
+		.baseURL(System.getProperty("baseUrl"))
 		.inferHtmlResources(BlackList(""".*\.js.*""", """.*\.css.*""", """.*\.gif.*""", """.*\.jpeg.*""", """.*\.jpg.*""", """.*\.ico.*""", """.*\.woff.*""", """.*\.(t|o)tf.*""", """.*\.png.*"""), WhiteList())
 		.acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
 		.acceptEncodingHeader("gzip, deflate")
@@ -29,9 +29,9 @@ class GCloud10Application extends Simulation {
 
 	setUp(
 	  scn.inject(
-	    constantUsersPerSec(2) during (100 seconds) randomized,
+	    constantUsersPerSec(System.getProperty("initialUserRate").toDouble) during (new FiniteDuration(java.lang.Long.getLong("initialUserDuration"), java.util.concurrent.TimeUnit.SECONDS)) randomized,
 	    nothingFor(20 seconds),
-	    splitUsers(200) into (rampUsers(10) over (7 seconds)) separatedBy (13 seconds)
+	    splitUsers(Integer.getInteger("secondaryUsersCount")) into (rampUsers(Integer.getInteger("secondaryUserRamp")) over (new FiniteDuration(java.lang.Long.getLong("secondaryUserDuration"), java.util.concurrent.TimeUnit.SECONDS))) separatedBy (new FiniteDuration(java.lang.Long.getLong("secondaryUserPause"), java.util.concurrent.TimeUnit.SECONDS))
 	  ).exponentialPauses
-	).protocols(httpProtocol).maxDuration(11 minutes)
+	).protocols(httpProtocol).maxDuration(new FiniteDuration(java.lang.Long.getLong("testDuration"), java.util.concurrent.TimeUnit.MINUTES))
 }

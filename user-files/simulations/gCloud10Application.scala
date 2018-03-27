@@ -27,11 +27,20 @@ class GCloud10Application extends Simulation {
 			exec(cloudHostingService, cloudSoftwareService, cloudSupportService)
 		}
 
+	var initialUserRate = System.getProperty("initialUserRate").toDouble
+	var initialUserDuration = new FiniteDuration(java.lang.Long.getLong("initialUserDuration"), java.util.concurrent.TimeUnit.SECONDS)
+	var secondaryUsersCount = Integer.getInteger("secondaryUsersCount")
+	var secondaryUserRamp = Integer.getInteger("secondaryUserRamp")
+	var secondaryUserDuration = new FiniteDuration(java.lang.Long.getLong("secondaryUserDuration"), java.util.concurrent.TimeUnit.SECONDS)
+	var secondaryUserPause = new FiniteDuration(java.lang.Long.getLong("secondaryUserPause"), java.util.concurrent.TimeUnit.SECONDS)
+	var testDuration = new FiniteDuration(java.lang.Long.getLong("testDuration"), java.util.concurrent.TimeUnit.MINUTES)
+
+
 	setUp(
 	  scn.inject(
-	    constantUsersPerSec(System.getProperty("initialUserRate").toDouble) during (new FiniteDuration(java.lang.Long.getLong("initialUserDuration"), java.util.concurrent.TimeUnit.SECONDS)) randomized,
+	    constantUsersPerSec(initialUserRate) during (initialUserDuration) randomized,
 	    nothingFor(20 seconds),
-	    splitUsers(Integer.getInteger("secondaryUsersCount")) into (rampUsers(Integer.getInteger("secondaryUserRamp")) over (new FiniteDuration(java.lang.Long.getLong("secondaryUserDuration"), java.util.concurrent.TimeUnit.SECONDS))) separatedBy (new FiniteDuration(java.lang.Long.getLong("secondaryUserPause"), java.util.concurrent.TimeUnit.SECONDS))
+	    splitUsers(secondaryUsersCount) into (rampUsers(secondaryUserRamp) over (secondaryUserDuration)) separatedBy (secondaryUserPause)
 	  ).exponentialPauses
-	).protocols(httpProtocol).maxDuration(new FiniteDuration(java.lang.Long.getLong("testDuration"), java.util.concurrent.TimeUnit.MINUTES))
+	).protocols(httpProtocol).maxDuration(testDuration)
 }

@@ -504,11 +504,12 @@ object CloudSoftwareService {
 			.exec(http("software_service_request_101")
 				.post("/suppliers/frameworks/g-cloud-10/submissions/cloud-software/${cloud_software_service_id}/complete")
 				.headers(headers_101))
-			.pause(23)
+			.pause(11)
 
 	val cloudSoftwareService = exec(
 		exitBlockOnFail {
-			exec(chain_0, chain_1, chain_2)
+			pause(11)
+			.exec(chain_0, chain_1, chain_2)
 		}
 	)
 }

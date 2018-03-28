@@ -492,11 +492,12 @@ object CloudHostingService {
 			.exec(http("hosting_service_request_99")
 				.post("/suppliers/frameworks/g-cloud-10/submissions/cloud-hosting/${cloud_hosting_service_id}/complete")
 				.headers(headers_99))
-			.pause(23)
+			.pause(11)
 
 	val cloudHostingService = exec(
 		exitBlockOnFail {
-			exec(chain_0, chain_1)
+			pause(11)
+			.exec(chain_0, chain_1)
 		}
 	)
 }

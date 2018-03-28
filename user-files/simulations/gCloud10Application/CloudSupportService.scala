@@ -21,7 +21,8 @@ object CloudSupportService {
 
 	val cloudSupportService = exec(
 		exitBlockOnFail {
-			exec(http("support_service_request_0")
+			pause(11)
+			.exec(http("support_service_request_0")
 				.get("/suppliers/frameworks/g-cloud-10/submissions/cloud-support")
 				.headers(headers_0))
 			.pause(11)
@@ -204,7 +205,7 @@ object CloudSupportService {
 			.exec(http("support_service_request_39")
 				.post("/suppliers/frameworks/g-cloud-10/submissions/cloud-support/${cloud_support_service_id}/complete")
 				.headers(headers_39))
-			.pause(23)
+			.pause(11)
 		}
 	)
 }

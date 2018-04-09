@@ -24,7 +24,11 @@ class GCloud10Application extends Simulation {
 	var scn = scenario("G-Cloud 10 Application")
 		.exec(login, updateSupplierDetails, declaration)
 		.forever() {
-			exec(cloudHostingService, cloudSoftwareService, cloudSupportService)
+			uniformRandomSwitch(
+				exec(cloudHostingService),
+				exec(cloudSoftwareService),
+				exec(cloudSupportService)
+			)
 		}
 
 	var initialUserRate = System.getProperty("initialUserRate").toDouble

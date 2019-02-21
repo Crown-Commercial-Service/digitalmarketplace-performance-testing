@@ -84,5 +84,5 @@ class GCloud11Application extends Simulation {
 
   val scn = scenario("G-11 Supplier sign up").exec(SignUp.sign_up)
 
-  setUp(scn.inject(rampUsers(10) over (10 seconds)).protocols(httpProtocol))
+  setUp(scn.inject(rampUsers(3000) over (60 minutes)).protocols(httpProtocol))
 }

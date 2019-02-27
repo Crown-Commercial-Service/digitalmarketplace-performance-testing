@@ -1,67 +1,59 @@
 #!/bin/bash
 
-USERS=1
-REPEAT=10
-RAMP_UP=10
-UNIT=times
-MIN_IDLE=0
-MAX_IDLE=0
-PAGE_SIZE=100
+BASE_URL='http://localhost'
+TEST_DURATION=30
+INITIAL_USER_RATE=2
+INITIAL_USER_DURATION=100
+SECONDARY_USERS_COUNT=200
+SECONDARY_USER_RAMP=10
+SECONDARY_USER_DURATION=7
+SECONDARY_USER_PAUSE=59
 TEST=
 
 while getopts ":-:" opt; do
   case $opt in
     -)
         case "${OPTARG}" in
-            token)
-                val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
-                echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                TOKEN=${val}
-                ;;
             baseUrl)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
                 BASE_URL=${val}
                 ;;
-            username)
+            testDuration)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                USERNAME=${val}
+                TEST_DURATION=${val}
                 ;;
-            password)
+            initialUserRate)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                PASSWORD=${val}
+                INITIAL_USER_RATE=${val}
                 ;;
-            users)
+            initialUserDuration)
+                echo "Optind: ${OPTIND}"
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                USERS=${val}
+                INITIAL_USER_DURATION=${val}
                 ;;
-            rampUp)
+            secondaryUsersCount)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                RAMP_UP=${val}
+                SECONDARY_USERS_COUNT=${val}
                 ;;
-            repeat)
+            secondaryUserRamp)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                REPEAT=${val}
+                SECONDARY_USER_RAMP=${val}
                 ;;
-            unit)
+            secondaryUserDuration)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                UNIT=${val}
+                SECONDARY_USER_DURATION=${val}
                 ;;
-            minIdle)
+            secondaryUserPause)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                MIN_IDLE=${val}
-                ;;
-            maxIdle)
-                val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
-                echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
-                MAX_IDLE=${val}
+                SECONDARY_USER_PAUSE=${val}
                 ;;
             test)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
@@ -77,4 +69,4 @@ done
 
 echo $TEST
 
-./bin/gatling.sh -Dtoken=$TOKEN -DbaseUrl=$BASE_URL -Dusername=$USERNAME -Dpassword=$PASSWORD -Dusers=$USERS -DrampUp=$RAMP_UP -Drepeat=$REPEAT -Dunit=$UNIT -DminIdleTime=$MIN_IDLE -DmaxIdleTime=$MAX_IDLE -s $TEST
+./bin/gatling.sh -DbaseUrl=$BASE_URL -DtestDuration=$TEST_DURATION -DinitialUserRate=$INITIAL_USER_RATE -DinitialUserDuration=$INITIAL_USER_DURATION -DsecondaryUsersCount=$SECONDARY_USERS_COUNT -DsecondaryUserRamp=$SECONDARY_USER_RAMP -DsecondaryUserDuration=$SECONDARY_USER_DURATION -DsecondaryUserPause=$SECONDARY_USER_PAUSE -s $TEST

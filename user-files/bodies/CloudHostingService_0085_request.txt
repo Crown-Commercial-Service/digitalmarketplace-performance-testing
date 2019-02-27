@@ -1,0 +1,21 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="standardsCSASTAR"
+
+True
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="standardsCSASTARWhen"
+
+31/12/2016
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="standardsCSASTARLevel"
+
+level_1_csa_star_self_assessment
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="standardsCSASTARExclusions"
+
+What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? What parts of your service are not covered by your CSA STAR certification? 
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_continue"
+
+Save and continue
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

@@ -1,0 +1,25 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="installation"
+
+True
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="installationCompatibleOperatingSystems"
+
+android
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="installationCompatibleOperatingSystems"
+
+linux_or_unix
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="installationCompatibleOperatingSystems"
+
+windows
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="installationCompatibleOperatingSystems"
+
+other
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_continue"
+
+Save and continue
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

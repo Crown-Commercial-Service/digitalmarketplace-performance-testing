@@ -59,3 +59,5 @@ local.properties
 
 conf/recorder.conf
 user-files/data/g_10_supplier_logins.csv
+
+local.nix

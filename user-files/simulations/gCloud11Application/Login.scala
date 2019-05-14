@@ -1,4 +1,4 @@
-package gCloud10Application
+package gCloud11Application
 
 import scala.concurrent.duration._
 
@@ -12,7 +12,7 @@ object Login {
 		"Origin" -> "http://localhost",
 		"Upgrade-Insecure-Requests" -> "1")
 
-	val user_feeder = csv("g_10_supplier_logins.csv").circular
+	val user_feeder = csv("g_11_supplier_logins.csv").circular
 
 	val login = feed(user_feeder)
 		.exec(http("login_request_0")

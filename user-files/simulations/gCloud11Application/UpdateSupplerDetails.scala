@@ -46,7 +46,7 @@ object UpdateSupplerDetails {
 		.exec(http("update_details_request_8")
 			.post("/suppliers/registered-address/edit")
 			.headers(headers_0)
-			.formParam("address1", "The Load Building, Test Street")
+			.formParam("street", "The Load Building, Test Street")
 			.formParam("city", "Testville")
 			.formParam("postcode", "TE5 TER")
 			.formParam("registrationCountry", "territory:AQ"))

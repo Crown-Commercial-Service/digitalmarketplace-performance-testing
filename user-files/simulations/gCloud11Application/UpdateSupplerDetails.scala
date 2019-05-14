@@ -49,7 +49,7 @@ object UpdateSupplerDetails {
 			.formParam("street", "The Load Building, Test Street")
 			.formParam("city", "Testville")
 			.formParam("postcode", "TE5 TER")
-			.formParam("registrationCountry", "territory:AQ"))
+			.formParam("country", "territory:AQ"))
 		.pause(23)
 		.exec(http("update_details_request_9")
 			.get("/suppliers/registration-number/edit")

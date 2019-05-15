@@ -16,7 +16,11 @@ object UpdateSupplerDetails {
 
 	val headers_7 = Map("Accept" -> "*/*")
 
-	val updateSupplierDetails = exec(http("update_details_request_1")
+	val updateSupplierDetails = exec(http("register_interest_request_1")
+			.post("/suppliers/frameworks/g-cloud-11")
+			.headers(headers_1))
+		.pause(11)
+		.exec(http("update_details_request_1")
 			.get("/suppliers/details")
 			.headers(headers_1))
 		.pause(11)

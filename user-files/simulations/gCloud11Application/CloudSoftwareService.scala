@@ -455,7 +455,7 @@ object CloudSoftwareService {
 				.body(RawFileBody("CloudSoftwareService_0090_request.txt")))
 			.pause((sp*23).toInt)
 			.exec(http("software_service_request_91")
-				.post("/suppliers/frameworks/g-cloud-11/submissions/cloud-software/${cloud_software_service_id}/edit/standards-and-certifications/other-security-accreditations")
+				.post("/suppliers/frameworks/g-cloud-11/submissions/cloud-software/${cloud_software_service_id}/edit/standards-and-certifications/other-security-certifications")
 				.headers(headers_3)
 				.body(RawFileBody("CloudSoftwareService_0091_request.txt")))
 			.pause((sp*23).toInt)

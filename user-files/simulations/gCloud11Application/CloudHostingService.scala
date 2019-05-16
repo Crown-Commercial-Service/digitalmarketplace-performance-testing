@@ -435,7 +435,7 @@ object CloudHostingService {
 				.body(RawFileBody("CloudHostingService_0086_request.txt")))
 			.pause((sp*23).toInt)
 			.exec(http("hosting_service_request_87")
-				.post("/suppliers/frameworks/g-cloud-11/submissions/cloud-hosting/${cloud_hosting_service_id}/edit/standards-and-certifications/other-security-accreditations")
+				.post("/suppliers/frameworks/g-cloud-11/submissions/cloud-hosting/${cloud_hosting_service_id}/edit/standards-and-certifications/other-security-certifications")
 				.headers(headers_3)
 				.body(RawFileBody("CloudHostingService_0087_request.txt")))
 			.pause((sp*23).toInt)

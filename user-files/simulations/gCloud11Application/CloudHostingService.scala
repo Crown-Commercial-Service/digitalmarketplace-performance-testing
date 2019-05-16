@@ -444,7 +444,7 @@ object CloudHostingService {
 				.headers(headers_0))
 			.pause((sp*11).toInt)
 			.exec(http("hosting_service_request_89")
-				.post("/suppliers/frameworks/g-cloud-11/submissions/cloud-hosting/${cloud_hosting_service_id}/edit/energy-efficiency/energy-efficient-datacentres")
+				.post("/suppliers/frameworks/g-cloud-11/submissions/cloud-hosting/${cloud_hosting_service_id}/edit/energy-efficiency/energy-efficiency")
 				.headers(headers_3)
 				.body(RawFileBody("CloudHostingService_0089_request.txt")))
 			.pause((sp*23).toInt)

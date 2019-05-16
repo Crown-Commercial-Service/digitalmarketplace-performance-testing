@@ -1,27 +1,7 @@
 ----WebKitFormBoundaryH2hTfwjGBpETaysO
 Content-Disposition: form-data; name="documentation"
 
-True
-----WebKitFormBoundaryH2hTfwjGBpETaysO
-Content-Disposition: form-data; name="documentationFormats"
-
-html
-----WebKitFormBoundaryH2hTfwjGBpETaysO
-Content-Disposition: form-data; name="documentationFormats"
-
-pdf
-----WebKitFormBoundaryH2hTfwjGBpETaysO
-Content-Disposition: form-data; name="documentationFormatsOther"
-
-
-----WebKitFormBoundaryH2hTfwjGBpETaysO
-Content-Disposition: form-data; name="documentationFormatsOther"
-
-
-----WebKitFormBoundaryH2hTfwjGBpETaysO
-Content-Disposition: form-data; name="documentationAccessibility"
-
-none_or_not_sure
+False
 ----WebKitFormBoundaryH2hTfwjGBpETaysO
 Content-Disposition: form-data; name="save_and_continue"
 

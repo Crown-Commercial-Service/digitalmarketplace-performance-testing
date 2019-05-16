@@ -19,6 +19,10 @@ Content-Disposition: form-data; name="documentationFormatsOther"
 
 
 ----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="documentationAccessibility"
+
+none_or_not_sure
+----WebKitFormBoundaryH2hTfwjGBpETaysO
 Content-Disposition: form-data; name="save_and_continue"
 
 Save and continue

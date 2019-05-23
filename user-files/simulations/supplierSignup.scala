@@ -1,13 +1,11 @@
-package gcloud11
-
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class GCloud11Application extends Simulation {
+class SupplierSignup extends Simulation {
 
   val httpProtocol = http
-    .baseURL("https://www.preview.marketplace.team")
+    .baseURL(System.getProperty("baseUrl"))
     .inferHtmlResources(BlackList(""".*\.js.*""", """.*\.css.*""", """.*\.gif.*""", """.*\.jpeg.*""", """.*\.jpg.*""", """.*\.ico.*""", """.*\.woff.*""", """.*\.(t|o)tf.*""", """.*\.png.*"""), WhiteList())
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
     .acceptEncodingHeader("gzip, deflate")
@@ -84,7 +82,7 @@ class GCloud11Application extends Simulation {
     )
   }
 
-  val scn = scenario("G-11 Supplier sign up").exec(SignUp.sign_up)
+  val scn = scenario("Supplier sign up").exec(SignUp.sign_up)
 
   setUp(scn.inject(rampUsers(3000) over (60 minutes)).protocols(httpProtocol))
 }

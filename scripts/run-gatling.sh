@@ -8,6 +8,7 @@ SECONDARY_USERS_COUNT=200
 SECONDARY_USER_RAMP=10
 SECONDARY_USER_DURATION=7
 SECONDARY_USER_PAUSE=59
+SCALE_PAUSES=1.0
 TEST=
 
 while getopts ":-:" opt; do
@@ -55,6 +56,11 @@ while getopts ":-:" opt; do
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
                 SECONDARY_USER_PAUSE=${val}
                 ;;
+            scalePauses)
+                val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
+                echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
+                SCALE_PAUSES=${val}
+                ;;
             test)
                 val="${!OPTIND}"; OPTIND=$(( $OPTIND + 1 ))
                 echo "Parsing option: '--${OPTARG}', value: '${val}'" >&2;
@@ -69,4 +75,4 @@ done
 
 echo $TEST
 
-./bin/gatling.sh -DbaseUrl=$BASE_URL -DtestDuration=$TEST_DURATION -DinitialUserRate=$INITIAL_USER_RATE -DinitialUserDuration=$INITIAL_USER_DURATION -DsecondaryUsersCount=$SECONDARY_USERS_COUNT -DsecondaryUserRamp=$SECONDARY_USER_RAMP -DsecondaryUserDuration=$SECONDARY_USER_DURATION -DsecondaryUserPause=$SECONDARY_USER_PAUSE -s $TEST
+./bin/gatling.sh -DbaseUrl=$BASE_URL -DtestDuration=$TEST_DURATION -DinitialUserRate=$INITIAL_USER_RATE -DinitialUserDuration=$INITIAL_USER_DURATION -DsecondaryUsersCount=$SECONDARY_USERS_COUNT -DsecondaryUserRamp=$SECONDARY_USER_RAMP -DsecondaryUserDuration=$SECONDARY_USER_DURATION -DsecondaryUserPause=$SECONDARY_USER_PAUSE -DscalePauses=$SCALE_PAUSES -s $TEST

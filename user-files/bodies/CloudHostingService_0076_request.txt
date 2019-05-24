@@ -11,14 +11,6 @@ Content-Disposition: form-data; name="managementAccessAuthentication"
 
 dedicated_link
 ----WebKitFormBoundaryH2hTfwjGBpETaysO
-Content-Disposition: form-data; name="managementAccessAuthentication"
-
-other
-----WebKitFormBoundaryH2hTfwjGBpETaysO
-Content-Disposition: form-data; name="managementAccessAuthenticationDescription"
-
-
-----WebKitFormBoundaryH2hTfwjGBpETaysO
 Content-Disposition: form-data; name="save_and_continue"
 
 Save and continue

@@ -1,13 +1,11 @@
-package gcloud11
-
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
-class GCloud11Application extends Simulation {
+class SupplierSignup extends Simulation {
 
   val httpProtocol = http
-    .baseURL("https://www.preview.marketplace.team")
+    .baseURL(System.getProperty("baseUrl"))
     .inferHtmlResources(BlackList(""".*\.js.*""", """.*\.css.*""", """.*\.gif.*""", """.*\.jpeg.*""", """.*\.jpg.*""", """.*\.ico.*""", """.*\.woff.*""", """.*\.(t|o)tf.*""", """.*\.png.*"""), WhiteList())
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
     .acceptEncodingHeader("gzip, deflate")
@@ -27,29 +25,31 @@ class GCloud11Application extends Simulation {
       "Origin" -> "http://localhost",
       "Upgrade-Insecure-Requests" -> "1")
 
+    var sp = System.getProperty("scalePauses").toDouble
+
     val sign_up = exec(http("Index")
       .get("/suppliers/supply")
       .headers(headers_0)
     )
-      .pause(11)
+      .pause((sp*11).toInt)
       .exec(http("Start page")
         .get("/suppliers/create/start")
         .headers(headers_0)
       )
-      .pause(11)
+      .pause((sp*11).toInt)
       .exec(http("DUNS number")
         .get("/suppliers/create/duns-number")
         .check(css("input[name=csrf_token]", "value").saveAs("csrf"))
         .headers(headers_0)
       )
-      .pause(11)
+      .pause((sp*11).toInt)
       .exec(http("Post DUNS number")
         .post("/suppliers/create/duns-number")
         .headers(headers_3)
         .formParamSeq(Seq(("duns_number", ""), ("csrf_token", "${csrf}")))
         .check(status.is(400))
       )
-      .pause(11)
+      .pause((sp*11).toInt)
       .exec(http("Contact details")
         .post("/suppliers/create/company-details")
         .formParam("company_name", "Gatling Co")
@@ -59,13 +59,13 @@ class GCloud11Application extends Simulation {
         .formParam("csrf_token", "${csrf}")
         .headers(headers_3)
       )
-      .pause(11)
+      .pause((sp*11).toInt)
       .exec(http("Create login")
         .post("/suppliers/create/account")
         .formParamSeq(Seq(("email_address", "company@example.com"), ("csrf_token", "${csrf}")))
         .headers(headers_3)
       )
-      .pause(11)
+      .pause((sp*11).toInt)
       .exec(http("Check info")
         .post("/suppliers/create/company-summary")
         .formParam("csrf_token", "${csrf}")
@@ -76,13 +76,13 @@ class GCloud11Application extends Simulation {
 
     val applyAsSupplier = exec(
       exitBlockOnFail {
-        pause(11)
+        pause((sp*11).toInt)
           .exec(sign_up)
       }
     )
   }
 
-  val scn = scenario("G-11 Supplier sign up").exec(SignUp.sign_up)
+  val scn = scenario("Supplier sign up").exec(SignUp.sign_up)
 
   setUp(scn.inject(rampUsers(3000) over (60 minutes)).protocols(httpProtocol))
 }

@@ -207,10 +207,12 @@ object CloudSupportService {
 				.headers(headers_2)
 				.body(RawFileBody("gCloud12Application/CloudSupportService_0038_request.txt")))
 			.pause((sp*23).toInt)
-			.exec(http("support_service_request_39")
-				.post("/suppliers/frameworks/g-cloud-12/submissions/cloud-support/${cloud_support_service_id}/complete")
-				.headers(headers_39))
-			.pause((sp*11).toInt)
+			.randomSwitch(
+				50.0 -> exec(http("support_service_request_39")
+					.post("/suppliers/frameworks/g-cloud-12/submissions/cloud-support/${cloud_support_service_id}/complete")
+					.headers(headers_39))
+				.pause((sp*11).toInt)
+			)
 		}
 	)
 }

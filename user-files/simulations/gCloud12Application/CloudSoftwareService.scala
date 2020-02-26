@@ -506,10 +506,12 @@ object CloudSoftwareService {
 				.headers(headers_3)
 				.body(RawFileBody("gCloud12Application/CloudSoftwareService_0100_request.txt")))
 			.pause((sp*23).toInt)
-			.exec(http("software_service_request_101")
-				.post("/suppliers/frameworks/g-cloud-12/submissions/cloud-software/${cloud_software_service_id}/complete")
-				.headers(headers_101))
-			.pause((sp*11).toInt)
+			.randomSwitch(
+				50.0 -> exec(http("software_service_request_101")
+					.post("/suppliers/frameworks/g-cloud-12/submissions/cloud-software/${cloud_software_service_id}/complete")
+					.headers(headers_101))
+				.pause((sp*11).toInt)
+			)
 
 	val cloudSoftwareService = exec(
 		exitBlockOnFail {

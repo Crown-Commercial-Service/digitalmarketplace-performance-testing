@@ -494,10 +494,12 @@ object CloudHostingService {
 				.headers(headers_3)
 				.body(RawFileBody("gCloud12Application/CloudHostingService_0098_request.txt")))
 			.pause((sp*23).toInt)
-			.exec(http("hosting_service_request_99")
-				.post("/suppliers/frameworks/g-cloud-12/submissions/cloud-hosting/${cloud_hosting_service_id}/complete")
-				.headers(headers_99))
-			.pause((sp*11).toInt)
+			.randomSwitch(
+				50.0 -> exec(http("hosting_service_request_99")
+					.post("/suppliers/frameworks/g-cloud-12/submissions/cloud-hosting/${cloud_hosting_service_id}/complete")
+					.headers(headers_99))
+				.pause((sp*11).toInt)
+			)
 
 	val cloudHostingService = exec(
 		exitBlockOnFail {

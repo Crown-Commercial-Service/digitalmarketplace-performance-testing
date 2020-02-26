@@ -4,7 +4,7 @@ import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
-import gCloud11Application.Login.login
+import SupplierLogin.login
 import gCloud11Application.UpdateSupplerDetails.updateSupplierDetails
 import gCloud11Application.Declaration.declaration
 import gCloud11Application.CloudHostingService.cloudHostingService

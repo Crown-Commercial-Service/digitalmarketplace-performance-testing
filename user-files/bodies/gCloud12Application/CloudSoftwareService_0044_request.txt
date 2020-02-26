@@ -1,0 +1,29 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="publicSectorNetworks"
+
+True
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="publicSectorNetworksTypes"
+
+psn
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="publicSectorNetworksTypes"
+
+n3
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="publicSectorNetworksTypes"
+
+swan
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="publicSectorNetworksOther"
+
+
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="publicSectorNetworksOther"
+
+
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_return"
+
+Save and return to service summary
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

@@ -1,0 +1,21 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="priceMin"
+
+10
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="priceMax"
+
+1000
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="priceUnit"
+
+Virtual machine
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="priceInterval"
+
+Quarter
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_continue"
+
+Save and continue
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

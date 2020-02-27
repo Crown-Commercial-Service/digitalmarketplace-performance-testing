@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Copyright 2011-2016 GatlingCorp (http://gatling.io)
 #

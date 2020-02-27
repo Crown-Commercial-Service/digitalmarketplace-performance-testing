@@ -1,0 +1,17 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="scaling"
+
+True
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="scalingType"
+
+automatic
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="scalingType"
+
+user_intervention
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_continue"
+
+Save and continue
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

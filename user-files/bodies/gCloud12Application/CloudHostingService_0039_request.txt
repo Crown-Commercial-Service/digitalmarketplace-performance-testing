@@ -1,0 +1,21 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataProtectionBetweenNetworks"
+
+private_or_psn
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataProtectionBetweenNetworks"
+
+ipsec_or_vpn
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataProtectionBetweenNetworks"
+
+legacy_ssl
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="dataProtectionBetweenNetworksOther"
+
+
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_continue"
+
+Save and continue
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

@@ -5,13 +5,13 @@ import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
 import SupplierLogin.login
-import gCloud11Application.UpdateSupplerDetails.updateSupplierDetails
-import gCloud11Application.Declaration.declaration
-import gCloud11Application.CloudHostingService.cloudHostingService
-import gCloud11Application.CloudSoftwareService.cloudSoftwareService
-import gCloud11Application.CloudSupportService.cloudSupportService
+import gCloud12Application.UpdateSupplerDetails.updateSupplierDetails
+import gCloud12Application.Declaration.declaration
+import gCloud12Application.CloudHostingService.cloudHostingService
+import gCloud12Application.CloudSoftwareService.cloudSoftwareService
+import gCloud12Application.CloudSupportService.cloudSupportService
 
-class GCloud11Application extends Simulation {
+class GCloud12Application extends Simulation {
 
 	val httpProtocol = http
 		.baseURL(System.getProperty("baseUrl"))
@@ -21,7 +21,7 @@ class GCloud11Application extends Simulation {
 		.acceptLanguageHeader("en-GB,en-US;q=0.9,en;q=0.8")
 		.userAgentHeader("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.162 Safari/537.36")
 
-	var scn = scenario("G-Cloud 11 Application")
+	var scn = scenario("G-Cloud 12 Application")
 		.exec(login, updateSupplierDetails, declaration)
 		.forever() {
 			uniformRandomSwitch(

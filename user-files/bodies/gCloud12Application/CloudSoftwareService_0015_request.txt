@@ -1,0 +1,13 @@
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="resellingType"
+
+reseller_extra_features_and_support
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="resellingOrganisations"
+
+GDS
+----WebKitFormBoundaryH2hTfwjGBpETaysO
+Content-Disposition: form-data; name="save_and_return"
+
+Save and return to service summary
+----WebKitFormBoundaryH2hTfwjGBpETaysO--

@@ -10,14 +10,14 @@ object UpdateSupplerDetails {
 
 	val headers_0 = Map(
 		"Origin" -> "http://localhost",
-		"Upgrade-Insecure-Requests" -> "1",
-		"X-CSRFToken" -> "${csrf}")
+		"Upgrade-Insecure-Requests" -> "1") // ,
+//		"X-CSRFToken" -> "${csrf}")
 
-	val headers_1 = Map("Upgrade-Insecure-Requests" -> "1",
-		"X-CSRFToken" -> "${csrf}")
+	val headers_1 = Map("Upgrade-Insecure-Requests" -> "1") // ,
+//		"X-CSRFToken" -> "${csrf}")
 
-	val headers_7 = Map("Accept" -> "*/*",
-		"X-CSRFToken" -> "${csrf}")
+	val headers_7 = Map("Accept" -> "*/*") // ,
+//		"X-CSRFToken" -> "${csrf}")
 
 	var sp = System.getProperty("scalePauses").toDouble
 

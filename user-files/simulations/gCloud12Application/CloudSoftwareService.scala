@@ -8,19 +8,19 @@ import io.gatling.jdbc.Predef._
 
 object CloudSoftwareService {
 
-	val headers_0 = Map("Upgrade-Insecure-Requests" -> "1",
-		"X-CSRFToken" -> "${csrf}")
+	val headers_0 = Map("Upgrade-Insecure-Requests" -> "1") // ,
+//		"X-CSRFToken" -> "${csrf}")
 
 	val headers_3 = Map(
 		"Content-Type" -> "multipart/form-data; boundary=--WebKitFormBoundaryH2hTfwjGBpETaysO",
 		"Origin" -> "http://localhost",
-		"Upgrade-Insecure-Requests" -> "1",
-		"X-CSRFToken" -> "${csrf}")
+		"Upgrade-Insecure-Requests" -> "1") // ,
+//		"X-CSRFToken" -> "${csrf}")
 
 	val headers_101 = Map(
 		"Origin" -> "http://localhost",
-		"Upgrade-Insecure-Requests" -> "1",
-		"X-CSRFToken" -> "${csrf}")
+		"Upgrade-Insecure-Requests" -> "1") // ,
+//		"X-CSRFToken" -> "${csrf}")
 
 	var sp = System.getProperty("scalePauses").toDouble
 

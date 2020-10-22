@@ -56,10 +56,13 @@ Combined Simulation (update services whilst fetching):
 
 the custom feeder class creates seed data - either from file or generated in class for use in scenarios
 
-
 ## Running tests
 
-./scripts/run-gatling.sh --test DataApiImportServicesSimulation
+Make sure you are using Java 8, then run:
+
+```
+./scripts/run-gatling.sh --test GCloud12Application
+```
 
 ### Params
 

@@ -58,6 +58,6 @@ local.properties
 .buildpath
 
 conf/recorder.conf
-user-files/data/g_10_supplier_logins.csv
+user-files/resources/g_10_supplier_logins.csv
 
 local.nix

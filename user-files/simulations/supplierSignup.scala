@@ -5,7 +5,7 @@ import scala.concurrent.duration._
 class SupplierSignup extends Simulation {
 
   val httpProtocol = http
-    .baseURL(System.getProperty("baseUrl"))
+    .baseUrl(System.getProperty("baseUrl"))
     .inferHtmlResources(BlackList(""".*\.js.*""", """.*\.css.*""", """.*\.gif.*""", """.*\.jpeg.*""", """.*\.jpg.*""", """.*\.ico.*""", """.*\.woff.*""", """.*\.(t|o)tf.*""", """.*\.png.*"""), WhiteList())
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
     .acceptEncodingHeader("gzip, deflate")
@@ -84,5 +84,5 @@ class SupplierSignup extends Simulation {
 
   val scn = scenario("Supplier sign up").exec(SignUp.sign_up)
 
-  setUp(scn.inject(rampUsers(3000) over (60 minutes)).protocols(httpProtocol))
+  setUp(scn.inject(rampUsers(3000) during (60 minutes)).protocols(httpProtocol))
 }

@@ -14,7 +14,7 @@ import gCloud12Application.CloudSupportService.cloudSupportService
 class GCloud12Application extends Simulation {
 
 	val httpProtocol = http
-		.baseURL(System.getProperty("baseUrl"))
+		.baseUrl(System.getProperty("baseUrl"))
 		.inferHtmlResources(BlackList(""".*\.js.*""", """.*\.css.*""", """.*\.gif.*""", """.*\.jpeg.*""", """.*\.jpg.*""", """.*\.ico.*""", """.*\.woff.*""", """.*\.(t|o)tf.*""", """.*\.png.*"""), WhiteList())
 		.acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8")
 		.acceptEncodingHeader("gzip, deflate")
@@ -44,7 +44,7 @@ class GCloud12Application extends Simulation {
 	  scn.inject(
 	    constantUsersPerSec(initialUserRate) during (initialUserDuration) randomized,
 	    nothingFor(20 seconds),
-	    splitUsers(secondaryUsersCount) into (rampUsers(secondaryUserRamp) over (secondaryUserDuration)) separatedBy (secondaryUserPause)
+			rampUsers(secondaryUsersCount) during (secondaryUserDuration)
 	  ).exponentialPauses
 	).protocols(httpProtocol).maxDuration(testDuration)
 }

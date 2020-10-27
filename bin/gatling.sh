@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright 2011-2016 GatlingCorp (http://gatling.io)
+# Copyright 2011-2017 GatlingCorp (http://gatling.io)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -32,23 +32,23 @@ export GATLING_HOME GATLING_CONF
 echo "GATLING_HOME is set to ${GATLING_HOME}"
 
 DEFAULT_JAVA_OPTS="-server"
-DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -Xmx1G"
-DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -XX:+UseG1GC -XX:MaxGCPauseMillis=30 -XX:G1HeapRegionSize=16m -XX:InitiatingHeapOccupancyPercent=75 -XX:+ParallelRefProcEnabled"
-DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -XX:+PerfDisableSharedMem -XX:+AggressiveOpts -XX:+OptimizeStringConcat"
-DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError"
-DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false"
+DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -Xmx1G -XX:+HeapDumpOnOutOfMemoryError"
+DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -XX:+UseG1GC -XX:+ParallelRefProcEnabled"
+DEFAULT_JAVA_OPTS="${DEFAULT_JAVA_OPTS} -XX:MaxInlineLevel=20 -XX:MaxTrivialSize=12 -XX:-UseBiasedLocking"
 COMPILER_OPTS="-Xss100M $DEFAULT_JAVA_OPTS $JAVA_OPTS"
 
 # Setup classpaths
-COMMON_CLASSPATH="$GATLING_CONF:${JAVA_CLASSPATH}"
-COMPILER_CLASSPATH="$GATLING_HOME/lib/zinc/*:$COMMON_CLASSPATH"
-GATLING_CLASSPATH="$GATLING_HOME/lib/*:$GATLING_HOME/user-files:$COMMON_CLASSPATH"
+COMPILER_CLASSPATH="$GATLING_HOME/lib/*:$GATLING_CONF:"
+GATLING_CLASSPATH="$GATLING_HOME/lib/*:$GATLING_HOME/user-files:$GATLING_CONF:"
 
-# Build compilation classpath
-COMPILATION_CLASSPATH=`find "$GATLING_HOME/lib" -maxdepth 1 -name "*.jar" -type f -exec printf :{} ';'`
+
+# Use the extra compiler options flag only if they are provided
+if [ -n "$EXTRA_SCALAC_OPTIONS" ]; then
+    EXTRA_COMPILER_OPTIONS="-eso $EXTRA_SCALAC_OPTIONS"
+fi
 
 # Run the compiler
-"$JAVA" $COMPILER_OPTS -cp "$COMPILER_CLASSPATH" io.gatling.compiler.ZincCompiler -ccp "$COMPILATION_CLASSPATH" "$@"  2> /dev/null
+"$JAVA" $COMPILER_OPTS -cp "$COMPILER_CLASSPATH" io.gatling.compiler.ZincCompiler $EXTRA_COMPILER_OPTIONS "$@" 2> /dev/null
 # Run Gatling
 # "$JAVA" $DEFAULT_JAVA_OPTS $JAVA_OPTS -cp "$GATLING_CLASSPATH" io.gatling.app.Gatling "$@"
 

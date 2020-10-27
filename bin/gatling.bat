@@ -1,6 +1,6 @@
 @ECHO OFF
 @REM
-@REM Copyright 2011-2016 GatlingCorp (http://gatling.io)
+@REM Copyright 2011-2017 GatlingCorp (http://gatling.io)
 @REM
 @REM Licensed under the Apache License, Version 2.0 (the "License");
 @REM you may not use this file except in compliance with the License.
@@ -42,12 +42,16 @@ if not defined GATLING_CONF set GATLING_CONF="%GATLING_HOME%"\conf
 
 echo GATLING_HOME is set to "%GATLING_HOME%"
 
-set JAVA_OPTS=-server -Xmx1G -XX:+UseG1GC -XX:MaxGCPauseMillis=30 -XX:G1HeapRegionSize=16m -XX:InitiatingHeapOccupancyPercent=75 -XX:+ParallelRefProcEnabled -XX:+PerfDisableSharedMem -XX:+AggressiveOpts -XX:+OptimizeStringConcat -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Djava.net.preferIPv6Addresses=false %JAVA_OPTS%
+set JAVA_OPTS=-Xmx1G -XX:+UseG1GC -XX:MaxGCPauseMillis=30 -XX:G1HeapRegionSize=16m -XX:InitiatingHeapOccupancyPercent=75 -XX:+ParallelRefProcEnabled -XX:+PerfDisableSharedMem -XX:+HeapDumpOnOutOfMemoryError -XX:MaxInlineLevel=20 -XX:MaxTrivialSize=12 -XX:-UseBiasedLocking %JAVA_OPTS%
+
+if "%PROCESSOR_ARCHITECTURE%" == "x86" if "%PROCESSOR_ARCHITEW6432%" == "" goto skipServer
+set JAVA_OPTS=-server %JAVA_OPTS%
+
+:skipServer
 set COMPILER_OPTS=-Xss100M %JAVA_OPTS%
 rem Setup classpaths
-set COMMON_CLASSPATH=%GATLING_CONF%;%JAVA_CLASSPATH%
-set COMPILER_CLASSPATH="%GATLING_HOME%"\lib\zinc\*;%COMMON_CLASSPATH%
-set GATLING_CLASSPATH="%GATLING_HOME%"\lib\*;"%GATLING_HOME%"\user-files;%COMMON_CLASSPATH%
+set COMPILER_CLASSPATH="%GATLING_HOME%"\lib\*;%GATLING_CONF%;
+set GATLING_CLASSPATH="%GATLING_HOME%"\lib\*;"%GATLING_HOME%"\user-files;%GATLING_CONF%;
 
 set JAVA=java
 if exist "%JAVA_HOME%\bin\java.exe" goto setJavaHome
@@ -59,9 +63,7 @@ set JAVA="%JAVA_HOME%\bin\java.exe"
 :run
 echo JAVA = "%JAVA%"
 rem Run the compiler
-set COMPILATION_CLASSPATH=""
-for %%i in ("%GATLING_HOME%\lib\*.jar") do call :addToPath "%%i"
-%JAVA% %COMPILER_OPTS% -cp %COMPILER_CLASSPATH% io.gatling.compiler.ZincCompiler -ccp %COMPILATION_CLASSPATH% %USER_ARGS%  2>NUL
+%JAVA% %COMPILER_OPTS% -cp %COMPILER_CLASSPATH% io.gatling.compiler.ZincCompiler %USER_ARGS%  2>NUL
 rem Run Gatling
 %JAVA% %JAVA_OPTS% -cp %GATLING_CLASSPATH% io.gatling.app.Gatling %USER_ARGS%
 if %errorlevel% neq 0 exit /b %errorlevel%
@@ -83,7 +85,3 @@ goto exit
 if not defined NO_PAUSE pause
 endlocal
 exit /b 0
-
-:addToPath
-set COMPILATION_CLASSPATH=%1;%COMPILATION_CLASSPATH%
-goto :EOF

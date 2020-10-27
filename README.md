@@ -1,6 +1,6 @@
 # Digital Marketplace Performance tests
 
-Based on gatling [http://gatling.io/docs/2.1.6/quickstart.html](http://gatling.io/docs/2.1.6/quickstart.html)
+Based on gatling <https://gatling.io/docs/3.4/quickstart/>
 
 ## Layout:
 
@@ -11,7 +11,7 @@ Important files are:
 All files under the user-files/ directory:
 
         - bodies: these is the JSON bodies used in API calls
-        - data: these are seed data for calls - for example search terms or supplier IDs
+        - resources: these are seed data for calls - for example search terms or supplier IDs
         - simulations: these are the actual performance tests
 
 Simulations:
@@ -88,7 +88,7 @@ the simulation.conf contains basic setup. includes bearer tokens, urls and defau
 
 ## Test Results
 
-These are summarised onscreen and also there is an reports directory for graphical representation
+These are summarised onscreen and there is an reports directory for graphical representation
 
 ### TODO:
 

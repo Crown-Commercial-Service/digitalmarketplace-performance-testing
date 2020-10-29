@@ -5,12 +5,12 @@ import io.gatling.http.Predef._
 import io.gatling.jdbc.Predef._
 
 import SupplierLogin.login
-import dos5Application.UserResearch.user_research
 import dos5Application.ConfirmDetails.confirm_details
 import dos5Application.Declaration.declaration
 import dos5Application.DigitalOutcomes.digital_outcomes
 import dos5Application.DigitalSpecialists.digital_specialists
 import dos5Application.UserResearchParticipants.user_research_participants
+import dos5Application.UserResearch.user_research
 
 
 class Dos5Application extends Simulation {
@@ -23,8 +23,14 @@ class Dos5Application extends Simulation {
     .upgradeInsecureRequestsHeader("1")
     .userAgentHeader("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0")
 
-  var scn = scenario("DOS 5 Application")
-    .exec(login, confirm_details, digital_specialists, user_research_participants)
+  var digitalServiceSupplier = scenario("Digital Service Supplier")
+    .exec(login, confirm_details, declaration, digital_outcomes, digital_specialists, user_research_participants)
 
-  setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
+  var userResearchStudioSupplier = scenario("UR Studio Supplier")
+    .exec(login, confirm_details, declaration, user_research, user_research, user_research)
+
+  setUp(
+    digitalServiceSupplier.inject(rampUsers(4) during (5 minutes)),
+    userResearchStudioSupplier.inject(rampUsers(2) during (5 minutes)),
+  ).protocols(httpProtocol)
 }

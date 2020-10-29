@@ -11,7 +11,7 @@ import dos5Application.DigitalOutcomes.digital_outcomes
 import dos5Application.DigitalSpecialists.digital_specialists
 import dos5Application.UserResearchParticipants.user_research_participants
 import dos5Application.UserResearch.user_research
-
+import dos5Application.AdditionalGets.additional_gets
 
 class Dos5Application extends Simulation {
   val httpProtocol = http
@@ -24,13 +24,13 @@ class Dos5Application extends Simulation {
     .userAgentHeader("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0")
 
   var digitalServiceSupplier = scenario("Digital Service Supplier")
-    .exec(login, confirm_details, declaration, digital_outcomes, digital_specialists, user_research_participants)
+    .exec(login, confirm_details, declaration, digital_outcomes, digital_specialists, user_research_participants, additional_gets)
 
   var userResearchStudioSupplier = scenario("UR Studio Supplier")
-    .exec(login, confirm_details, declaration, user_research, user_research, user_research)
+    .exec(login, confirm_details, declaration, user_research, user_research, user_research, additional_gets)
 
   setUp(
-    digitalServiceSupplier.inject(rampUsers(4) during (5 minutes)),
-    userResearchStudioSupplier.inject(rampUsers(2) during (5 minutes)),
-  ).protocols(httpProtocol)
+    digitalServiceSupplier.inject(rampUsers(4) during (5 minutes)).exponentialPauses,
+    userResearchStudioSupplier.inject(rampUsers(2) during (5 minutes)).exponentialPauses,
+  ).protocols(httpProtocol).maxDuration(6 minutes)
 }

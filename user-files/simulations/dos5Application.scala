@@ -7,6 +7,7 @@ import io.gatling.jdbc.Predef._
 import SupplierLogin.login
 import dos5Application.UserResearch.user_research
 import dos5Application.ConfirmDetails.confirm_details
+import dos5Application.Declaration.declaration
 
 
 class Dos5Application extends Simulation {
@@ -20,7 +21,7 @@ class Dos5Application extends Simulation {
     .userAgentHeader("Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:82.0) Gecko/20100101 Firefox/82.0")
 
   var scn = scenario("DOS 5 Application")
-    .exec(login, confirm_details, user_research)
+    .exec(login, confirm_details, declaration)
 
   setUp(scn.inject(atOnceUsers(1))).protocols(httpProtocol)
 }

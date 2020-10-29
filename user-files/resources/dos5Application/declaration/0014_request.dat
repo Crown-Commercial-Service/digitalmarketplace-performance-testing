@@ -1,0 +1,69 @@
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="taxEvasion"
+
+True
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="environmentalSocialLabourLaw"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="bankrupt"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="graveProfessionalMisconduct"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="distortingCompetition"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="conflictOfInterest"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="distortedCompetition"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="significantOrPersistentDeficiencies"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="seriousMisrepresentation"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="witheldSupportingDocuments"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="influencedContractingAuthority"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="confidentialInformation"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="misleadingInformation"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="mitigatingFactors"
+
+test
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="unspentTaxConvictions"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="incorrectTaxReturns"
+
+False
+-----------------------------49970962817506559082037960245
+Content-Disposition: form-data; name="mitigatingFactors2"
+
+
+-----------------------------49970962817506559082037960245--

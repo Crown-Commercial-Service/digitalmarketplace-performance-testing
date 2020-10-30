@@ -15,7 +15,7 @@ import dos5Application.AdditionalGets.additional_gets
 
 class Dos5Application extends Simulation {
   val httpProtocol = http
-    .baseUrl("http://localhost")
+    .baseUrl("https://www.staging.marketplace.team/")
     .inferHtmlResources(BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png""", """.*\.woff2""", """.*detectportal\.firefox\.com.*"""), WhiteList())
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
     .acceptEncodingHeader("gzip, deflate")
@@ -29,8 +29,21 @@ class Dos5Application extends Simulation {
   var userResearchStudioSupplier = scenario("UR Studio Supplier")
     .exec(login, confirm_details, declaration, user_research, user_research, user_research, additional_gets)
 
+  val testDuration = FiniteDuration(60, MINUTES)
+  val testCutOff = FiniteDuration(65, MINUTES)
+
+  val basePredictedRatePerMinute = 0.5
+  val scaleFactor = 4
+
+  val digitalServiceUsers = (2.0/3 * basePredictedRatePerMinute * testDuration.toMinutes * scaleFactor).toInt
+  val userResearchUsers = (1.0/3 * basePredictedRatePerMinute * testDuration.toMinutes * scaleFactor).toInt
+
   setUp(
-    digitalServiceSupplier.inject(rampUsers(4) during (5 minutes)).exponentialPauses,
-    userResearchStudioSupplier.inject(rampUsers(2) during (5 minutes)).exponentialPauses,
-  ).protocols(httpProtocol).maxDuration(6 minutes)
+    digitalServiceSupplier.inject(
+      rampUsers(digitalServiceUsers) during (testDuration)
+    ).exponentialPauses,
+    userResearchStudioSupplier.inject(
+      rampUsers(userResearchUsers) during (testDuration)
+    ).exponentialPauses,
+  ).protocols(httpProtocol).maxDuration(testCutOff)
 }

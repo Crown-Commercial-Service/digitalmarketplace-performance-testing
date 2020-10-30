@@ -1,70 +1,35 @@
 # Digital Marketplace Performance tests
 
-Based on gatling <https://gatling.io/docs/3.4/quickstart/>
-
-## Layout:
-
-Important files are:
-
-        - simulation.conf: holds basic config (see Params section below)
-
-All files under the user-files/ directory:
-
-        - bodies: these is the JSON bodies used in API calls
-        - resources: these are seed data for calls - for example search terms or supplier IDs
-        - simulations: these are the actual performance tests
-
-Simulations:
-
-These are held in 2 folders:
-
-        - scenarios: these are the actual raw tests that can be executed - for example fetch services by page
-        - simulations: these are combinations of scenarios - these are based to the command line scripts -
-        so for example we may want to run a tests where we combine fetching and update services. We would have a simulation that refers to two scenarios.
-
-
-### Examples
-
-Scenario:
-
-          val fetchServices = scenario("FetchServices")
-            .keepRepeating {
-            feed(randomPage)
-              .exec(http("FetchServices")
-              .get("/services?page=${random_page}")
-              .check(status.is(200))
-              ).pause(minIdleTime milliseconds, maxIdleTime milliseconds)
-          }
-
-
-Single Simulation (import services):
-
-        class DataApiImportServicesSimulation extends Simulation with DigitalMarketplaceHttpConf {
-          setUp(importServices.inject(atOnceUsers(numberOfUsers)).protocols(dataApiHttpConf))
-        }
-
-Combined Simulation (update services whilst fetching):
-
-        class DataApiUpdateAndFetchServicesSimulation extends Simulation with DigitalMarketplaceHttpConf {
-          setUp(
-            updateServices.inject(atOnceUsers(numberOfUsers)).protocols(dataApiHttpConf),
-            fetchServices.inject(atOnceUsers(numberOfUsers)).protocols(dataApiHttpConf)
-          )
-        }
-
-## Feeders
-
-the custom feeder class creates seed data - either from file or generated in class for use in scenarios
+Performance tests for the Digital Marketplace, using [Gatling 3.4](https://gatling.io/docs/3.4/quickstart/).
 
 ## Running tests
 
-Make sure you are using Java 8, then run:
+Make sure you are using Java 8 - run `java -version` to check.
 
-```
-./scripts/run-gatling.sh --test GCloud12Application
-```
+To run a test, run `./bin/gatling.sh`. Choose the scenario you want to run from the menu. See `./bin/gatling.sh --help` for all the options.
 
-### Params
+Gatling will show the test results on screen and write them to a file.
+
+## Creating and changing tests
+
+Start by reading the [Gatling documentation](https://gatling.io/docs/current/quickstart/). 
+
+The most important files are in the `user-files` directory:
+
+- `resources` contains seed data for API calls, including search terms and supplier IDs
+- `simulations` contains the tests, written in Scala.
+
+### Recording a scenario
+
+If you need to create a new user flow to include in your test, a quick way of doing this is to use the [Gatling recorder](https://gatling.io/docs/current/http/recorder/). This allows you to record yourself taking the actions that you want Gatling to perform during the test. You can run it with `./bin/recorder.sh`.
+
+As per the documentation, you should use Firefox. You will need to use a private window to avoid [HSTS](https://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security).
+
+Having finished a recording, you will have an auto-generated Scala file that will run your recording as a test. Tidy this up as necessary - see existing test scenarios as references for how to do this.
+
+## Params
+
+The g-cloud tests accept the following parameters:
 
         users: number of concurrent users
         rampUp: how quickly to get to max concurrent users (seconds)
@@ -74,29 +39,18 @@ Make sure you are using Java 8, then run:
         maxIdle: maximum time between HTTP calls
         test: Name of Simulation class to run
 
-### Additional Params
-
-the following can be read from the environment
+The following can be read from the environment
 
         username: for web forms
         password: for web forms
         authHeaderData: for basic auth
 
-## Configuration
-
-the simulation.conf contains basic setup. includes bearer tokens, urls and defaults for the above parameters.
-
-## Test Results
-
-These are summarised onscreen and there is an reports directory for graphical representation
-
-### TODO:
+## TODO:
 
 - no reports option
 - combining several runs
 
-
-## Generating source Data
+## Generating source data
 
 Seed data for some tests needs to be derived from the database.
 

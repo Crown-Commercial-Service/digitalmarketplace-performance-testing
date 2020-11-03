@@ -14,11 +14,11 @@ import dos5Application.UserResearch.user_research
 import dos5Application.AdditionalGets.additional_gets
 
 /**
- * Test whether the DMp can handle 4x predicted DOS 5 traffic.
+ * Find out how the DMp copes with 4x to 6x predicted DOS 5 traffic.
  */
-class Dos5Application extends Simulation {
+class Dos5ApplicationOverload extends Simulation {
   val httpProtocol = http
-    .baseUrl("https://www.staging.marketplace.team/")
+    .baseUrl("http://localhost/")
     .inferHtmlResources(BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png""", """.*\.woff2""", """.*detectportal\.firefox\.com.*"""), WhiteList())
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
     .acceptEncodingHeader("gzip, deflate")
@@ -32,21 +32,28 @@ class Dos5Application extends Simulation {
   var userResearchStudioSupplier = scenario("UR Studio Supplier")
     .exec(login, confirm_details, declaration, user_research, user_research, user_research, additional_gets)
 
-  val testDuration = FiniteDuration(60, MINUTES)
-  val testCutOff = FiniteDuration(65, MINUTES)
+  val rampDuration = FiniteDuration(60, MINUTES)
+  val steadyDuration = FiniteDuration(30, MINUTES)
+  val testCutOff = FiniteDuration(95, MINUTES)
 
   val basePredictedRatePerMinute = 0.5
-  val scaleFactor = 4
+  val initialScaleFactor = 4
+  val finalScaleFactor = 6
 
-  val digitalServiceUsers = (2.0/3 * basePredictedRatePerMinute * testDuration.toMinutes * scaleFactor).toInt
-  val userResearchUsers = (1.0/3 * basePredictedRatePerMinute * testDuration.toMinutes * scaleFactor).toInt
+  val initialDigitalServiceUsersPerSec = (2.0/3 * (basePredictedRatePerMinute/60) * initialScaleFactor)
+  val finalDigitalServiceUsersPerSec = (2.0/3 * (basePredictedRatePerMinute/60) * finalScaleFactor)
+
+  val initialUserResearchUsersPerSec = (1.0/3 * (basePredictedRatePerMinute/60) * initialScaleFactor)
+  val finalUserResearchUsersPerSec = (1.0/3 * (basePredictedRatePerMinute/60) * finalScaleFactor)
 
   setUp(
     digitalServiceSupplier.inject(
-      rampUsers(digitalServiceUsers) during (testDuration)
+      rampUsersPerSec (initialDigitalServiceUsersPerSec) to (finalDigitalServiceUsersPerSec) during (rampDuration) randomized,
+      constantUsersPerSec (finalDigitalServiceUsersPerSec) during (steadyDuration) randomized,
     ).exponentialPauses,
     userResearchStudioSupplier.inject(
-      rampUsers(userResearchUsers) during (testDuration)
+      rampUsersPerSec (initialUserResearchUsersPerSec) to (finalUserResearchUsersPerSec) during (rampDuration),
+      constantUsersPerSec (finalUserResearchUsersPerSec) during (steadyDuration) randomized,
     ).exponentialPauses,
   ).protocols(httpProtocol).maxDuration(testCutOff)
 }

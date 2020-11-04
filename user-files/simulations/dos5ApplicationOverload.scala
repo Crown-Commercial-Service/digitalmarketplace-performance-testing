@@ -18,7 +18,7 @@ import dos5Application.AdditionalGets.additional_gets
  */
 class Dos5ApplicationOverload extends Simulation {
   val httpProtocol = http
-    .baseUrl("http://localhost/")
+    .baseUrl("https://www.staging.marketplace.team/")
     .inferHtmlResources(BlackList(""".*\.js""", """.*\.css""", """.*\.gif""", """.*\.jpeg""", """.*\.jpg""", """.*\.ico""", """.*\.woff""", """.*\.(t|o)tf""", """.*\.png""", """.*\.woff2""", """.*detectportal\.firefox\.com.*"""), WhiteList())
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8")
     .acceptEncodingHeader("gzip, deflate")
